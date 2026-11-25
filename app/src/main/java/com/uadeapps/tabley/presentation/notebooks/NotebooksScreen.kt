@@ -34,13 +34,14 @@ import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import com.uadeapps.tabley.domain.model.Notebook
 import androidx.compose.foundation.clickable
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable
 fun NotebooksScreen(
     onNotebookClick: (Long, String) -> Unit,
     viewModel: NotebookViewModel = hiltViewModel()
 ) {
-    val notebooks by viewModel.notebooks.collectAsState()
+    val notebooks by viewModel.notebooks.collectAsStateWithLifecycle()
 
     var showDialog by remember { mutableStateOf(false) }
     var notebookName by remember { mutableStateOf("") }

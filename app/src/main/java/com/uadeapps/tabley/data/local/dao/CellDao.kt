@@ -20,6 +20,16 @@ interface CellDao {
     @Query("SELECT * FROM cells WHERE columnId = :columnId")
     fun getCellsByColumn(columnId: Long): Flow<List<CellEntity>>
 
+    @Query(
+        """
+        SELECT cells.* FROM cells
+        INNER JOIN `rows` ON `rows`.id = cells.rowId
+        WHERE `rows`.tableId = :tableId
+        ORDER BY cells.rowId, cells.columnId
+        """
+    )
+    fun getCellsByTable(tableId: Long): Flow<List<CellEntity>>
+
     @Query("SELECT * FROM cells WHERE rowId = :rowId AND columnId = :columnId")
     suspend fun getCell(rowId: Long, columnId: Long): CellEntity?
 
