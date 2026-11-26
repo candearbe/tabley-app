@@ -26,6 +26,12 @@ class CellRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getCellsByTable(tableId: Long): Flow<List<Cell>> {
+        return cellDao.getCellsByTable(tableId).map { cells ->
+            cells.map { it.toDomain() }
+        }
+    }
+
     override suspend fun getCell(rowId: Long, columnId: Long): Cell? {
         return cellDao.getCell(rowId, columnId)?.toDomain()
     }

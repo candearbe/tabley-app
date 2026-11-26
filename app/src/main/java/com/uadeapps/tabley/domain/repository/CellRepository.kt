@@ -10,6 +10,8 @@ interface CellRepository {
 
     fun getCellsByColumn(columnId: Long): Flow<List<Cell>>
 
+    fun getCellsByTable(tableId: Long): Flow<List<Cell>>
+
     suspend fun getCell(rowId: Long, columnId: Long): Cell?
 
     suspend fun insertCell(cell: Cell): Long
